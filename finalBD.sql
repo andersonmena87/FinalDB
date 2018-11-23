@@ -41,3 +41,21 @@ CREATE OR REPLACE FUNCTION CALCULAR_CAJAS_NECESARIAS(ITEMS IN NUMBER,CAJAGRANDE 
       RETURN TOTAL;
     
 END CALCULAR_CAJAS_NECESARIAS;
+
+CREATE OR REPLACE FUNCTION LARGEST_SUM(a IN VARRAY)
+RETURN NUMBER
+AS 
+ max_so_far number;
+ curr_max number;
+BEGIN
+   max_so_far := a[0];
+   curr_max := a[0];
+
+    for i in 1..a.count 
+    Loop
+        curr_max = max(a[i], curr_max+a[i]);
+        max_so_far = max(max_so_far, curr_max);
+    End loop;
+
+    return max_so_far;
+END LARGEST_SUM; 
